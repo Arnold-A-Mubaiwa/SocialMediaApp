@@ -1,0 +1,16 @@
+.signin_tab,.signup_tab {
+    padding-left:50px;
+    padding-right:50px;
+    padding-top:5px;
+    padding-bottom:5px;
+  }
+  .top_bar{
+    border: 2px solid black;
+    text-align:center;
+  }
+  .main{
+    text-align:center;
+  }
+  .login_div, .register_div{
+    border: 2px solid black;
+  }
