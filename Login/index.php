@@ -1,8 +1,8 @@
 <?php
-        require_once("connection.php");
+        require_once("../connection.php");
         if($_SERVER["REQUEST_METHOD"]=='POST'){
         
-          if(empty($newName = $_POST['name'])){
+          if(empty($_POST['name'])){
             $newName=NULL;
             $password = mysqli_real_escape_string($conn,$_POST['password1']);
             $Email = $_POST['username1'];
@@ -63,7 +63,8 @@
           <label>Password</label></br>
           <input name="password1" type="password" placeholder="*********"/></br></br>
           <button type="submit" value="">Submit</button>
-        </form>
+        </form><br/>
+        <a href="ChangePass.php">Forgot Password</a>
       </div>
       <div class="register_div" hidden>
         <form method="post" action="">

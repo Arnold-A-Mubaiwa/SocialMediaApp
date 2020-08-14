@@ -24,4 +24,4 @@ Your website should do the following:
 
 8. Using your personal discretion make the social media beautiful by enhancing it with CSS3, Javascript or JQuery. 
 
-NOTE: <u> THE USE OF TECHNOLOGIES SUCH AS BOOTSTRAP AND WORDPRESS FOR DESIGNING IS STRICTLY PROHIBITED!!! <u>
+NOTE: <u> THE USE OF TECHNOLOGIES SUCH AS BOOTSTRAP AND WORDPRESS FOR DESIGNING IS STRICTLY PROHIBITED!!! </u>
