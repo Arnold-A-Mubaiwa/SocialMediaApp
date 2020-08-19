@@ -11,19 +11,33 @@
             $QueryTable = mysqli_query($conn,$findUser);
             $count = mysqli_num_rows($QueryTable);
             if ($count===1) {
-              echo "welcome";
+              header("location: ../Profile/timeline.php");
             }else{
               echo "fu";
             }
           }else{
+            
             $newEmail = $_POST["email"];
             $newName = $_POST['name'];
             $newSurname = $_POST["surname"];
             $newUsername = $_POST["username"];
             $newPassword =$_POST["password"];
+            $userTable = $newName.$newSurname;
+            $CreateTable = "CREATE TABLE $userTable (`ID` INT(5) NOT NULL AUTO_INCREMENT ,
+             `PostNo` INT(12) NOT NULL ,
+             `PostImage` BLOB NULL ,
+             `PostText` VARCHAR(10000) NULL,
+             `Comments` INT(12) NOT NULL ,
+             `Kites` INT(12) NOT NULL ,
+             `DateOfPost` DATETIME NOT NULL , PRIMARY KEY (`ID`))";
             $newUser = "INSERT INTO Users(Email,Names,Surname,Username,PassWord ) VALUES('".$newEmail."','".$newName."','".$newSurname."','".$newUsername."','".$newPassword."')";
-            mysqli_query($conn,$newUser);
+            if ($conn->query($CreateTable) === TRUE) {
+              mysqli_query($conn,$newUser);
+          }else {
+            echo "Error creating table: " . $conn->error;
+        }
             $current_id = mysqli_insert_id($conn);
+            $conn->close();
           }
         }
 ?> 
