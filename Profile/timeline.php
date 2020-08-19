@@ -11,7 +11,7 @@ $newPost="INSERT INTO ertyfghjk(PostNo,PostImage,PostText,Comments,Kites) VALUES
 if (mysqli_query($conn,$newPost)) {
     echo "added";
 }else{
-    echo "Lecturer not added". $conn->error;
+    echo  $conn->error;
 }
 $current_id = mysqli_insert_id($conn);
 }?>
