@@ -1,23 +1,6 @@
-<?php
+<?php 
 session_start();
 require_once("../connection.php");
-if ($_SERVER["REQUEST_METHOD"] == 'POST') {
-    $posttext = $_POST["posttext"];
-    // $postimage = $_POST["postimage"];
-    $postimage = addslashes(file_get_contents($_FILES['postimage']['tmp_name']));
-    $userID=$_SESSION['User_ID'];
-    $comment = 0;
-    $kites = 0;
-    $postno = abs(crc32(uniqid()));
-    $newPost = "INSERT INTO Post(PostNo,UserID,PostImage,PostText,Comments,Kites) VALUES('" . $postno . "','".$userID."','" . $postimage . "','" . $posttext . "','" . $comment . "','" . $kites . "')";
-
-    if (mysqli_query($conn, $newPost)) {
-        echo "posted";
-    } else {
-        echo  $conn->error;
-    }
-    $current_id = mysqli_insert_id($conn);
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,18 +50,12 @@ textarea {
 <body>
 <div class="row">
   <div class="column column1" style="background-color:#aaa;">
-  <form method="Post">
-        <textarea name="posttext">
-        </textarea><br>
-        <input type="file" name="postimage"><br>
-        <input type="submit" value="POST">
-        <input type="reset" value="CANCEL">
-    </form>
-    <!-- <a href="../Login/index.php">back</a> -->
+  profile pic
   </div>
   <div class="column column2" style="background-color:#bbb;">
     <?php
-      $result = mysqli_query($conn,"SELECT * FROM Post ORDER BY DateOfPost");
+      $userID=$_SESSION['User_ID'];
+      $result = mysqli_query($conn,"SELECT * FROM Post Where UserID = $userID ORDER BY DateOfPost");
       $i=0;
       while($row = mysqli_fetch_array($result)) {
         $posterID = $row["UserID"];

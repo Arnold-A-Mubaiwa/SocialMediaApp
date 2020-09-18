@@ -1,4 +1,5 @@
 <?php
+session_start();
         require_once("../connection.php");
         if($_SERVER["REQUEST_METHOD"]=='POST'){
         
@@ -6,36 +7,43 @@
             $newName=NULL;
             $password = mysqli_real_escape_string($conn,$_POST['password1']);
             $Email = $_POST['username1'];
-            $findUser = "SELECT Username from Users Where Email = '$Email' Or Username = '$Email'AND PassWord='$password'";
+            $findUser = "SELECT * from Users Where Email = '$Email' Or Username = '$Email'AND PassWord='$password'";
      
             $QueryTable = mysqli_query($conn,$findUser);
+            $row = mysqli_fetch_array($QueryTable,MYSQLI_ASSOC);
+            $currentUser = $row["UserID"];
             $count = mysqli_num_rows($QueryTable);
             if ($count===1) {
-              header("location: ../Profile/timeline.php");
+              $_SESSION['User_ID']=$currentUser;
+              header("location: ../Profile/frame.php");
             }else{
               echo "fu";
             }
           }else{
-            
+            $userID = abs(crc32(uniqid()));
             $newEmail = $_POST["email"];
             $newName = $_POST['name'];
             $newSurname = $_POST["surname"];
             $newUsername = $_POST["username"];
             $newPassword =$_POST["password"];
             $userTable = $newName.$newSurname;
-            $CreateTable = "CREATE TABLE $userTable (`ID` INT(5) NOT NULL AUTO_INCREMENT ,
-             `PostNo` INT(12) NOT NULL ,
-             `PostImage` BLOB NULL ,
-             `PostText` VARCHAR(10000) NULL,
-             `Comments` INT(12) NOT NULL ,
-             `Kites` INT(12) NOT NULL ,
-             `DateOfPost` DATETIME NOT NULL , PRIMARY KEY (`ID`))";
-            $newUser = "INSERT INTO Users(Email,Names,Surname,Username,PassWord ) VALUES('".$newEmail."','".$newName."','".$newSurname."','".$newUsername."','".$newPassword."')";
-            if ($conn->query($CreateTable) === TRUE) {
-              mysqli_query($conn,$newUser);
-          }else {
-            echo "Error creating table: " . $conn->error;
-        }
+            // $CreateTable = "CREATE TABLE $userTable (`ID` INT(5) NOT NULL AUTO_INCREMENT,
+            //  `PostNo` INT(20) NOT NULL,
+            //  `PostImage` BLOB NULL,
+            //  `PostText` VARCHAR(10000) NULL,
+            //  `Comments` INT(12) NOT NULL,
+            //  `Kites` INT(12) NOT NULL,
+            //  `DateOfPost` DATETIME NOT NULL, PRIMARY KEY (`ID`))";
+            $newUser = "INSERT INTO Users(UserID,Email,Names,Surname,Username,PassWord ) VALUES('".$userID."','".$newEmail."','".$newName."','".$newSurname."','".$newUsername."','".$newPassword."')";
+            // if ($conn->query($CreateTable) === TRUE) {
+              if(mysqli_query($conn,$newUser)===true){
+
+              }else{
+                echo "user not inserted into users". $conn -> error;
+              }
+        //   }else {
+        //     echo "Error creating table: " . $conn->error;
+        // }
             $current_id = mysqli_insert_id($conn);
             $conn->close();
           }
