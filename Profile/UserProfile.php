@@ -44,15 +44,24 @@ textarea {
   resize: none;
   font-family: Arial, Helvetica, sans-serif;
 }
+.profilepic{
+  border-radius: 50%;
+  width:100%;
+}
+.scrolls{
+            overflow: auto;
+    height: 500px;
+
+        }
     </style>
 </head>
 
 <body>
-<div class="row">
-  <div class="column column1" style="background-color:#aaa;">
-  profile pic
+<div class="row ">
+  <div class="column column1 scrolls" style="background-color:#aaa;">
+  <img class="profilepic" src="avatar.png" alt="Avatar">
   </div>
-  <div class="column column2" style="background-color:#bbb;">
+  <div class="column column2 scrolls" style="background-color:#bbb;">
     <?php
       $userID=$_SESSION['User_ID'];
       $result = mysqli_query($conn,"SELECT * FROM Post Where UserID = $userID ORDER BY DateOfPost");
@@ -62,16 +71,12 @@ textarea {
         $poster = mysqli_query($conn,"SELECT Names,Surname,Username FROM Users WHERE UserID = $posterID");
         $row1 = mysqli_fetch_array($poster);
     ?>
-      <div>
+      <div class="">
         <label><?php echo $row1["Names"]." ".$row1["Surname"]; ?></label><br>
         <?php 
         if($row["PostText"]!=null){
+          echo "<p>".$row["PostText"]."</p>";
         ?>
-        <p>
-          <?php 
-            echo $row["PostText"];
-          ?>
-        </p>
         <?php
         }
         if($row["PostImage"]!=null){

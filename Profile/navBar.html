@@ -37,10 +37,15 @@
 <body>
     <div class="topnav">
         <a class="active" href="timeline.php" target="main">KITES</a>
-        <a href="Chat.html" target="main">CHATS</a>
+        <a href="../Chat/chatframe.php" target="main">CHATS</a>
         <a href="UserProfile.php" target="main">UserProfile</a>
         <div class="topnav-right">
-          <a href="../Login/index.php" target="main">LOGOUT</a>
+          <a href="../Login/index.php" onclick="logout()" target="main">LOGOUT</a>
         </div>
+  <script>
+     function logout() {
+            window.top.document.location ="../index.php";
+        }
+  </script>
 </body>
 </html>
