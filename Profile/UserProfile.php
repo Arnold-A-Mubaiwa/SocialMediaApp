@@ -51,8 +51,22 @@ textarea {
 .scrolls{
             overflow: auto;
     height: 500px;
-
         }
+        .post{
+  width: 90%;
+  margin-top:20px;
+  margin-bottom: 20px;
+  padding-left: 3%;
+  padding-right: 5%;
+  background-color: white;
+}
+.textPost{
+  font-size: 24px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+label{
+  font-weight: bolder;
+}
     </style>
 </head>
 
@@ -71,17 +85,23 @@ textarea {
         $poster = mysqli_query($conn,"SELECT Names,Surname,Username FROM Users WHERE UserID = $posterID");
         $row1 = mysqli_fetch_array($poster);
     ?>
-      <div class="">
-        <label><?php echo $row1["Names"]." ".$row1["Surname"]; ?></label><br>
+      <div class="post">
+        <label><?php echo $row1["Names"]." ".$row1["Surname"]; ?></label><span> <?php echo $row["DateOfPost"];?></span><br>
+        <span> <?php echo "#".$row1["Username"];?></span>
         <?php 
         if($row["PostText"]!=null){
-          echo "<p>".$row["PostText"]."</p>";
         ?>
+        <p class="textPost">
+          <?php 
+            echo $row["PostText"];
+          ?>
+        </p>
         <?php
         }
         if($row["PostImage"]!=null){
         ?>
-        <img src="<?php echo $row["PostImage"]?>">
+            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['PostIymage']); ?>" /> 
+        
         <?php
         }
         ?>
