@@ -52,6 +52,35 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+         input ,select{
+      width: 50%;
+      height: 40px;
+      margin-bottom: 10px;
+      border: 1px solid rgb(11, 19, 46);
+      background-color: white;
+      padding-left: 20px;
+      font-size: 16px;
+    }
+
+    input[type=Submit] {
+      margin-left: 10px;
+      height: auto;
+      padding-bottom: 20px;
+      padding-top: 20px;
+      width: 50%;
+      background-color: rgb(11, 19, 46);
+      font-variant-caps: all-petite-caps;
+      font-weight: bolder;
+      font-size: 22px;
+      color: #fff;
+      border-radius: 9px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+    </style>
 </head>
 
 <body>
@@ -72,8 +101,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
         <select name="gender">
             <option>Male</option>
             <option>FEMALE</option>
-        </select>
-        <input type="submit">
+        </select><BR>
+        <input type="submit" value="UPDATE">
     
 </body>
 

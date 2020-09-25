@@ -113,7 +113,7 @@ if (isset($_POST["submit"])) {
       padding-left: 3%;
       padding-right: 5%;
       background-color: white;
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid lightgrey;
     }
 
     .textPost {
@@ -136,7 +136,7 @@ if (isset($_POST["submit"])) {
     }
 
     .imagePosted {
-      width: 100%;
+      width: 70%;
       padding-left: 40px;
 
     }
@@ -168,7 +168,7 @@ if (isset($_POST["submit"])) {
     <div class="column column2 scrolls">
       <?php
       $status;
-      $result = mysqli_query($conn, "SELECT * FROM Post ORDER BY DateOfPost");
+      $result = mysqli_query($conn, "SELECT * FROM Post ORDER BY DateOfPost DESC");
       $i = 0;
       while ($row = mysqli_fetch_array($result)) {
         $posterID = $row["UserID"];

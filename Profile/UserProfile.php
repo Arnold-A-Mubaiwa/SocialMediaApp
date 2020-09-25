@@ -138,7 +138,7 @@ if (isset($_POST["submit"])) {
     }
 
     .imagePosted {
-      width: 100%;
+      width: 70%;
       padding-left: 40px;
 
     }
@@ -198,6 +198,12 @@ if (isset($_POST["submit"])) {
                           } ?><br><br></td>
         </tr><br>
         <tr>
+          <td><?php if ($info['PhoneNumber'] != null) {
+                echo  "Phone Number "; ?></td>
+          <td><?php echo  $info['PhoneNumber'];
+              } ?></td>
+        </tr>
+        <tr>
           <td><?php if ($info['DateOfBirth'] != null) {
                 echo  "Date Of Birth"; ?></td>
           <td><?php echo $info['DateOfBirth'];
@@ -215,7 +221,7 @@ if (isset($_POST["submit"])) {
     <div class="column column2 scrolls">
       <?php
       $userID = $_SESSION['User_ID'];
-      $result = mysqli_query($conn, "SELECT * FROM Post Where UserID = $User ORDER BY DateOfPost");
+      $result = mysqli_query($conn, "SELECT * FROM Post Where UserID = $User ORDER BY DateOfPost DESC");
       $i = 0;
       while ($row = mysqli_fetch_array($result)) {
         $posterID = $row["UserID"];
@@ -223,8 +229,9 @@ if (isset($_POST["submit"])) {
         $row1 = mysqli_fetch_array($poster);
       ?>
         <div class="post">
-          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label><span class="time"> <?php echo $row["DateOfPost"]; ?></span><br>
-          <span> <?php echo "#" . $row1["Username"]; ?></span>
+          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label><span> <?php echo "#" . $row1["Username"]; ?></span><br>
+          <span class="time"> <?php echo $row["DateOfPost"]; ?></span>
+          
           <?php
           if ($row["PostText"] != null) {
           ?>
