@@ -1,3 +1,9 @@
+<?php
+session_start();
+require_once("../connection.php");
+// 
+$userID = $_SESSION['User_ID'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +31,10 @@
 }
 
 .topnav a.active {
-  background-color: #4CAF50;
+  background-color:rgb(11, 19, 46);
   color: white;
+  font-weight: bolder;
+  font-style: New Century Schoolbook;
 }
 
 .topnav-right {
@@ -36,9 +44,9 @@
 </head>
 <body>
     <div class="topnav">
-        <a class="active" href="timeline.php" target="main">KITES</a>
+        <a class="active" href="timeline.php" target="main">NOYOLO</a>
         <a href="../Chat/chatframe.php" target="main">CHATS</a>
-        <a href="UserProfile.php" target="main">UserProfile</a>
+        <?php echo  "<a href='UserProfile.php?UserID=" . $userID. "' target='main' >".$_SESSION['UserName']." ".$_SESSION['Surname'] ?></a>
         <div class="topnav-right">
           <a href="" onclick="logout()" target="main">LOGOUT</a>
         </div>
