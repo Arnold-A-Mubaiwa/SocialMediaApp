@@ -17,8 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $count = mysqli_num_rows($QueryTable);
     if ($count === 1) {
       $_SESSION['User_ID'] = $currentUser;
-      $_SESSION['UserName'] =$name;
-      $_SESSION['Surname'] =$surname;
+      $_SESSION['UserName'] = $name;
+      $_SESSION['Surname'] = $surname;
       header("location: ../Profile/frame.php");
     } else {
       // echo "fu";
@@ -92,6 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       font-size: 22px;
       color: #fff;
       border-radius: 9px;
+    }
+
+    label {
+      font-weight: bold;
     }
   </style>
 </head>

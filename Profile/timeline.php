@@ -3,14 +3,14 @@ session_start();
 require_once("../connection.php");
 $status = $statusMsg = '';
 
-  
-  $status = 'error';
-  if(isset($_POST["submit"])){
+
+$status = 'error';
+if (isset($_POST["submit"])) {
   if (!empty($_FILES["image"]["name"])) {
     $posttext = $_POST["posttext"];
-  $userID = $_SESSION['User_ID'];
-  $comment = 0;
-  $kites = 0;
+    $userID = $_SESSION['User_ID'];
+    $comment = 0;
+    $kites = 0;
     // Get file info 
     $fileName = basename($_FILES["image"]["name"]);
     $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
@@ -26,32 +26,32 @@ $status = $statusMsg = '';
 
       if ($insert) {
         $status = 'success';
-        $statusMsg = "File uploaded successfully.";echo  $conn->error;
+        $statusMsg = "File uploaded successfully.";
+        echo  $conn->error;
       } else {
-        $statusMsg = "File upload failed, please try again.";echo  $conn->error;
+        $statusMsg = "File upload failed, please try again.";
+        echo  $conn->error;
       }
     } else {
-      $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';echo  $conn->error;
-    }}
-  } else {
-    if(isset($_POST["submit"])){ 
-    $posttext = $_POST["posttext"];
-  $userID = $_SESSION['User_ID'];
-  $comment = 0;
-  $kites = 0;
-    $newPost = "INSERT INTO Post(UserID,PostText,Comments,Kites) VALUES('" . $userID . "','" . $posttext . "','" . $comment . "','" . $kites . "')";
-    if (mysqli_query($conn, $newPost)) {
-      // echo "posted";
-    } else {
-      // echo  $conn->error;
+      $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
+      echo  $conn->error;
     }
-    $current_id = mysqli_insert_id($conn);
-  }
-  }
+  }else {
+      $posttext = $_POST["posttext"];
+      $userID = $_SESSION['User_ID'];
+      // if($posttext!=""){
+      $comment = 0;
+      $kites = 0;
+      $newPost = "INSERT INTO Post(UserID,PostText,Comments,Kites) VALUES('" . $userID . "','" . $posttext . "','" . $comment . "','" . $kites . "')";
+      mysqli_query($conn, $newPost);
+      $current_id = mysqli_insert_id($conn);
+    }
+} 
+// }
 
 
 // Display status message 
-echo $statusMsg;
+// echo $statusMsg;
 
 ?>
 
@@ -134,19 +134,25 @@ echo $statusMsg;
       color: black;
       font-size: 11px;
     }
+
+    .imagePosted {
+      width: 100%;
+      padding-left: 40px;
+
+    }
   </style>
 </head>
 
 <body>
   <div class="row">
-    <div class="column column1" style="background-color:#aaa;">
-    <form  method="post" enctype="multipart/form-data">
-        <textarea name="posttext" >
+    <div class="column column1">
+      <form method="post" enctype="multipart/form-data">
+        <textarea name="posttext">
         </textarea><br>
-    <label>Select Image File:</label>
-    <input type="file" name="image">
-    <input type="submit" name="submit" value="Upload">
-</form>
+        <label>Select Image File:</label>
+        <input type="file" name="image">
+        <input type="submit" name="submit" value="Upload">
+      </form>
     </div>
     <div class="column column2 scrolls">
       <?php
@@ -174,7 +180,7 @@ echo $statusMsg;
           }
           if ($row["PostImage"] != null) {
           ?>
-            <img class="imagePosted" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['PostImage']); ?>" />
+            <img class="imagePosted" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['PostImage']); ?>" /><br><br>
           <?php
           }
           ?>

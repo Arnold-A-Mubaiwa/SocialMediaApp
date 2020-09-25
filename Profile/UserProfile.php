@@ -66,7 +66,7 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
       box-sizing: border-box;
       border: 2px solid #ccc;
       border-radius: 4px;
-      background-color: #f8f8f8;
+      /* background-color: #f8f8f8; */
       resize: none;
       font-family: Arial, Helvetica, sans-serif;
     }
@@ -103,15 +103,20 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
       color: black;
       font-size: 11px;
     }
+    .imagePosted {
+      width: 100%;
+      padding-left: 40px;
+
+    }
   </style>
 </head>
 
 <body>
   <div class="row ">
-    <div class="column column1 scrolls" style="background-color:#aaa;">
+    <div class="column column1 scrolls" style="background-color:rgb(11, 19, 46);">
       <img class="profilepic" src="avatar.png" alt="Avatar">
     </div>
-    <div class="column column2 scrolls" style="background-color:#bbb;">
+    <div class="column column2 scrolls">
       <?php
       $userID = $_SESSION['User_ID'];
       $result = mysqli_query($conn, "SELECT * FROM Post Where UserID = $User ORDER BY DateOfPost");
@@ -136,7 +141,7 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
           }
           if ($row["PostImage"] != null) {
           ?>
-            <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['PostIymage']); ?>" />
+            <img class="imagePosted" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['PostImage']); ?>" /><br><br>
 
           <?php
           }
