@@ -104,6 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       overflow: auto;
       height: 480px;
     }
+    
   </style>
 </head>
 

@@ -32,6 +32,13 @@ $sql = "SELECT * FROM Users WHERE UserID != $userID";
         text-decoration: none;
 
     }
+    .contact:active{
+      background-color: rgb(11, 19, 20);
+    }
+    .contact:hover{
+      background-color: white;
+      color: rgb(11, 19, 46);
+    }
     </style>
 </head>
 

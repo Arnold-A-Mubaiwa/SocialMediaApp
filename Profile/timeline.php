@@ -96,10 +96,10 @@ if (isset($_POST["submit"])) {
 
     textarea {
       width: 100%;
-      height: 150px;
-      padding: 12px 20px;
+      height: 100px;
+      padding-left: 30px;
       box-sizing: border-box;
-      border: 2px solid #ccc;
+      border: 2px solid rgb(11, 19, 46);
       border-radius: 4px;
       background-color: #f8f8f8;
       resize: none;
@@ -140,6 +140,17 @@ if (isset($_POST["submit"])) {
       padding-left: 40px;
 
     }
+    a:visited{
+      color: rgb(11, 19, 46);
+    }
+    .submit{
+      width: 100%;
+      background-color: rgb(11, 19, 46);
+      color: white;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -148,10 +159,10 @@ if (isset($_POST["submit"])) {
     <div class="column column1">
       <form method="post" enctype="multipart/form-data">
         <textarea name="posttext">
-        </textarea><br>
+        </textarea><br><br>
         <label>Select Image File:</label>
-        <input type="file" name="image">
-        <input type="submit" name="submit" value="Upload">
+        <input type="file" name="image"><br><br>
+        <input class="submit" type="submit" name="submit" value="POST">
       </form>
     </div>
     <div class="column column2 scrolls">
@@ -166,8 +177,9 @@ if (isset($_POST["submit"])) {
       ?>
         <div class="post">
           <?php echo  "<a href='UserProfile.php?UserID=" . $row['UserID'] . "' target='main' >" ?>
-          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label></a><span class="time"> <?php echo $row["DateOfPost"]; ?></span><br>
-          <span> <?php echo "#" . $row1["Username"]; ?></span>
+          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label><span> <?php echo "#" . $row1["Username"]; ?></span></a><br>
+          <span class="time"> <?php echo $row["DateOfPost"]; ?></span><br>
+          
           <?php
           if ($row["PostText"] != null) {
           ?>

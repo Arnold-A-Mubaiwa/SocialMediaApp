@@ -16,13 +16,44 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
       $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
       // Retrieve individual field value
       $User = $row["UserID"];
-      
+      $name = $row['Names'];
+      $surname = $row['Surname'];
+      $hashName = $row['Username'];
     }
   } else {
     echo "Oops! Something went wrong. Please try again later.";
   }
 }
+$status = $statusMsg = '';
+if (isset($_POST["submit"])) {
+  $status = 'error';
+  if (!empty($_FILES["image"]["name"])) {
+    // Get file info 
+    $fileName = basename($_FILES["image"]["name"]);
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
 
+    // Allow certain file formats 
+    $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
+    if (in_array($fileType, $allowTypes)) {
+      $image = $_FILES['image']['tmp_name'];
+      $imgContent = addslashes(file_get_contents($image));
+
+      // Insert image content into database 
+      $insert = $conn->query("UPDATE UserDetails set Profile='" . $imgContent . "' WHERE UserID='" . $User . "'");
+
+      if ($insert) {
+        $status = 'success';
+        $statusMsg = "File uploaded successfully.";
+      } else {
+        $statusMsg = "File upload failed, please try again.";
+      }
+    } else {
+      $statusMsg = 'Sorry, only JPG, JPEG, PNG, & GIF files are allowed to upload.';
+    }
+  } else {
+    $statusMsg = 'Please select an image file to upload.';
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +80,7 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
     .column1 {
       width: 20%;
       margin-right: 20px;
+      color: #ccc;
     }
 
     .column2 {
@@ -88,6 +120,7 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
       padding-left: 3%;
       padding-right: 5%;
       background-color: white;
+      border-bottom: 1px solid lightgrey;
     }
 
     .textPost {
@@ -103,10 +136,27 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
       color: black;
       font-size: 11px;
     }
+
     .imagePosted {
       width: 100%;
       padding-left: 40px;
 
+    }
+
+    .mid {
+      text-align: center;
+    }
+
+    table {
+      width: 100%;
+    }
+    .submit{
+      width: 100%;
+
+      padding: 5px;
+      background-color: white;
+      color:rgb(11, 19, 46) ;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -114,7 +164,53 @@ if ($stmt = mysqli_prepare($conn, $sql)) {
 <body>
   <div class="row ">
     <div class="column column1 scrolls" style="background-color:rgb(11, 19, 46);">
-      <img class="profilepic" src="avatar.png" alt="Avatar">
+      <?php
+      $userInfo = mysqli_query($conn, "SELECT * FROM UserDetails WHERE UserID = $User");
+      $info = mysqli_fetch_array($userInfo);
+      ?>
+      <?php if ($info['Profile'] != null) { ?>
+        <img class="profilepic" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($info['Profile']); ?>" />
+      <?php } else { ?>
+        <img class="profilepic" src="avatar.png" alt="Avatar">
+        </form>
+
+      <?php } if($_SESSION['User_ID']==$User){?>
+      <form method="post" enctype="multipart/form-data">
+        <label>Change Profile:</label>
+        <input type="file" name="image"><br><br>
+        <input type="submit" name="submit" class="submit" value="Upload">
+      </form>
+      <?php } ?>
+      <table>
+        <tr class="mid">
+          <td colspan="2"><b><?php echo  $name . " " . $surname; ?></b></td>
+        </tr>
+        <tr class="mid">
+          <td colspan="2"><?php echo  "#" . $hashName; ?><br></td>
+        </tr><?php if($_SESSION['User_ID']==$User){ ?>
+        <tr class="mid">
+          <td colspan="2"><?php  echo  "<a href='EditUser.php?UserID=" . $row['UserID'] . "' target='main' >" ?>Edit</a><br><br></td>
+        </tr>
+        <?php } ?>
+        <tr class="mid">
+          <td colspan="2"><?php if ($info['About'] != null) {
+                            echo  $info['About'];
+                          } ?><br><br></td>
+        </tr><br>
+        <tr>
+          <td><?php if ($info['DateOfBirth'] != null) {
+                echo  "Date Of Birth"; ?></td>
+          <td><?php echo $info['DateOfBirth'];
+              } ?></td>
+        </tr>
+
+        <tr>
+          <td><?php if ($info['Gender'] != null) {
+                echo  "Gender "; ?></td>
+          <td><?php echo  $info['Gender'];
+              } ?></td>
+        </tr>
+      </table>
     </div>
     <div class="column column2 scrolls">
       <?php
