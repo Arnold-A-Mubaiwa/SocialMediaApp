@@ -48,7 +48,5 @@ $sql = "SELECT * FROM Users WHERE UserID != $userID";
     }
     ?>
 </div>
- 
 </body>
-
 </html>
