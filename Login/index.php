@@ -8,7 +8,6 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     $password = mysqli_real_escape_string($conn, $_POST['password1']);
     $Email = $_POST['username1'];
     $findUser = "SELECT * from Users Where Email = '$Email' Or Username = '$Email'AND PassWord='$password'";
-
     $QueryTable = mysqli_query($conn, $findUser);
     $row = mysqli_fetch_array($QueryTable, MYSQLI_ASSOC);
     $currentUser = $row["UserID"];
@@ -21,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       $_SESSION['Surname'] = $surname;
       header("location: ../Profile/frame.php");
     } else {
-      // echo "fu";
+      
     }
   } else {
     $userID = abs(crc32(uniqid()));
@@ -60,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       width: 25%;
       margin-left: 4px;
       height: 40px;
-      background-color: rgb(11, 19, 46);
+      background-color: #750D37;
       color: white;
       opacity: 0.5;
     }
@@ -74,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       width: 50%;
       height: 40px;
       margin-bottom: 10px;
-      border: 1px solid rgb(11, 19, 46);
+      border: 1px solid #750D37;
       background-color: white;
       padding-left: 20px;
       font-size: 16px;
@@ -86,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       padding-bottom: 20px;
       padding-top: 20px;
       width: 50%;
-      background-color: rgb(11, 19, 46);
+      background-color: #750D37;
       font-variant-caps: all-petite-caps;
       font-weight: bolder;
       font-size: 22px;

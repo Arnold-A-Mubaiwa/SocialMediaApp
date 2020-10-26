@@ -1,20 +1,15 @@
 <?php
 session_start();
 require_once("../connection.php");
-// 
 $userID = $_SESSION['User_ID'];
 $sql = "SELECT * FROM Users WHERE UserID = ?";
-
 if ($stmt = mysqli_prepare($conn, $sql)) {
     mysqli_stmt_bind_param($stmt, "i", $param_id);
     $param_id = trim($_GET["UserID"]);
-    // Attempt to execute the prepared statement
-    if (mysqli_stmt_execute($stmt)) {
+     if (mysqli_stmt_execute($stmt)) {
         $result = mysqli_stmt_get_result($stmt);
         if (mysqli_num_rows($result) == 1) {
-            /* Fetch result row as an associative array. Since the result set contains only one row, we don't need to use while loop */
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            // Retrieve individual field value
             $userID = $row["UserID"];
         }
     } else {
@@ -57,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       width: 50%;
       height: 40px;
       margin-bottom: 10px;
-      border: 1px solid rgb(11, 19, 46);
+      border: 1px solid #750D37;
       background-color: white;
       padding-left: 20px;
       font-size: 16px;
@@ -69,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       padding-bottom: 20px;
       padding-top: 20px;
       width: 50%;
-      background-color: rgb(11, 19, 46);
+      background-color: #750D37;
       font-variant-caps: all-petite-caps;
       font-weight: bolder;
       font-size: 22px;

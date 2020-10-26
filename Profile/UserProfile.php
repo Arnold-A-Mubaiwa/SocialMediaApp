@@ -31,16 +31,13 @@ if (isset($_POST["submit"])) {
     // Get file info 
     $fileName = basename($_FILES["image"]["name"]);
     $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
-
     // Allow certain file formats 
     $allowTypes = array('jpg', 'png', 'jpeg', 'gif');
     if (in_array($fileType, $allowTypes)) {
       $image = $_FILES['image']['tmp_name'];
       $imgContent = addslashes(file_get_contents($image));
-
       // Insert image content into database 
       $insert = $conn->query("UPDATE UserDetails set Profile='" . $imgContent . "' WHERE UserID='" . $User . "'");
-
       if ($insert) {
         $status = 'success';
         $statusMsg = "File uploaded successfully.";
@@ -106,6 +103,7 @@ if (isset($_POST["submit"])) {
     .profilepic {
       border-radius: 50%;
       width: 100%;
+      height: 200px;
     }
 
     .scrolls {
@@ -150,12 +148,13 @@ if (isset($_POST["submit"])) {
     table {
       width: 100%;
     }
-    .submit{
+
+    .submit {
       width: 100%;
 
       padding: 5px;
       background-color: white;
-      color:rgb(11, 19, 46) ;
+      color: #750D37;
       font-weight: bold;
     }
   </style>
@@ -163,7 +162,7 @@ if (isset($_POST["submit"])) {
 
 <body>
   <div class="row ">
-    <div class="column column1 scrolls" style="background-color:rgb(11, 19, 46);">
+    <div class="column column1 scrolls" style="background-color:#750D37;">
       <?php
       $userInfo = mysqli_query($conn, "SELECT * FROM UserDetails WHERE UserID = $User");
       $info = mysqli_fetch_array($userInfo);
@@ -174,12 +173,13 @@ if (isset($_POST["submit"])) {
         <img class="profilepic" src="avatar.png" alt="Avatar">
         </form>
 
-      <?php } if($_SESSION['User_ID']==$User){?>
-      <form method="post" enctype="multipart/form-data">
-        <label>Change Profile:</label>
-        <input type="file" name="image"><br><br>
-        <input type="submit" name="submit" class="submit" value="Upload">
-      </form>
+      <?php }
+      if ($_SESSION['User_ID'] == $User) { ?>
+        <form method="post" enctype="multipart/form-data">
+          <label>Change Profile:</label>
+          <input type="file" name="image"><br><br>
+          <input type="submit" name="submit" class="submit" value="Upload">
+        </form>
       <?php } ?>
       <table>
         <tr class="mid">
@@ -187,10 +187,10 @@ if (isset($_POST["submit"])) {
         </tr>
         <tr class="mid">
           <td colspan="2"><?php echo  "#" . $hashName; ?><br></td>
-        </tr><?php if($_SESSION['User_ID']==$User){ ?>
-        <tr class="mid">
-          <td colspan="2"><?php  echo  "<a href='EditUser.php?UserID=" . $row['UserID'] . "' target='main' >" ?>Edit</a><br><br></td>
-        </tr>
+        </tr><?php if ($_SESSION['User_ID'] == $User) { ?>
+          <tr class="mid">
+            <td colspan="2"><?php echo  "<a href='EditUser.php?UserID=" . $row['UserID'] . "' target='main' >" ?>Edit</a><br><br></td>
+          </tr>
         <?php } ?>
         <tr class="mid">
           <td colspan="2"><?php if ($info['About'] != null) {
@@ -229,9 +229,9 @@ if (isset($_POST["submit"])) {
         $row1 = mysqli_fetch_array($poster);
       ?>
         <div class="post">
-          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label><span> <?php echo "#" . $row1["Username"]; ?></span><br>
+          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label>
           <span class="time"> <?php echo $row["DateOfPost"]; ?></span>
-          
+
           <?php
           if ($row["PostText"] != null) {
           ?>

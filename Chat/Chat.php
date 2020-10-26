@@ -105,10 +105,12 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       overflow: auto;
       height: 480px;
     }
-    .lighter{
+
+    .lighter {
       margin-right: 30%;
     }
-    textarea{
+
+    textarea {
       height: 40px;
       width: 90%;
       padding-top: 10px;
@@ -120,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
       /* background-color: #f8f8f8; */
       resize: none;
       font-family: Arial, Helvetica, sans-serif;
-      
+
     }
   </style>
 </head>
@@ -128,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
 <body>
 
   <div class="chats scrolls">
-    
+
     <?php
     $result = mysqli_query($conn, "SELECT * FROM Chat WHERE (SenderID=$userID AND ReceiverID= $Receiver) 
       OR (SenderID=$Receiver AND ReceiverID= $userID)");
@@ -191,11 +193,13 @@ if ($_SERVER["REQUEST_METHOD"] == 'POST') {
     <form method="POST">
       <textarea name="message" rows="4" cols="50">
     </textarea>
-    <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48"><br>
+      <input type="image" src="img_submit.gif" alt="Submit" width="48" height="48"><br>
       IMAGE : <input type="file" name="image">
-     
+
     </form>
-  </div>
+  </div><!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8713529.js"></script>
+<!-- End of HubSpot Embed Code -->
 </body>
 
 </html>

@@ -19,7 +19,7 @@ if (isset($_POST['username'])) {
       width: 50%;
       height: 40px;
       margin-bottom: 10px;
-      border: 1px solid rgb(11, 19, 46);
+      border: 1px solid #750D37;
       background-color: white;
       padding-left: 20px;
       font-size: 16px;
@@ -31,7 +31,7 @@ if (isset($_POST['username'])) {
       padding-bottom: 20px;
       padding-top: 20px;
       width: 50%;
-      background-color: rgb(11, 19, 46);
+      background-color: #750D37;
       font-variant-caps: all-petite-caps;
       font-weight: bolder;
       font-size: 22px;

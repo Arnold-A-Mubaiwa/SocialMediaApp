@@ -13,7 +13,7 @@ $userID = $_SESSION['User_ID'];
     <style>
         .topnav {
   overflow: hidden;
-  background-color: #333;
+  background-color: #750D37;
 }
 
 .topnav a {
@@ -31,7 +31,7 @@ $userID = $_SESSION['User_ID'];
 }
 
 .topnav a.active {
-  background-color:rgb(11, 19, 46);
+  background-color: #210124;
   color: white;
   font-weight: bolder;
   font-style: New Century Schoolbook;
@@ -40,16 +40,51 @@ $userID = $_SESSION['User_ID'];
 .topnav-right {
   float: right;
 }
+.topnav .search-container {
+  float: right;
+}
+
+.topnav input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: none;
+}
+
+.topnav .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #210124;
+  color: white;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.topnav .search-container button:hover {
+  background: #ccc;
+}
+
 </style>
 </head>
 <body>
     <div class="topnav">
-        <a class="active" href="timeline.php" target="main">NOYOLO</a>
-        <a href="../Chat/chatframe.php" target="main">CHATS</a>
+        <a class="active" href="timeline.php" target="main">LetsChatCode</a>
+       
         <?php echo  "<a href='UserProfile.php?UserID=" . $userID. "' target='main' >".$_SESSION['UserName']." ".$_SESSION['Surname'] ?></a>
-        <div class="topnav-right">
+        <a href="../Chat/chatframe.php" target="main">CHATS</a>
           <a href="" onclick="logout()" target="main">LOGOUT</a>
-        </div>
+        <!-- <div class="topnav-right">
+       
+        </div> -->
+         <div class="search-container">
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit">SEARCH</i></button>
+    </form>
+  </div>
   <script>
      function logout() {
             window.top.document.location ="../Login/index.php";

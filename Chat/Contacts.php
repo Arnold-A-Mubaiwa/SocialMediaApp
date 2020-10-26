@@ -13,7 +13,7 @@ $sql = "SELECT * FROM Users WHERE UserID != $userID";
     <title>Document</title>
     <style>
         body{
-            background-color:  rgb(11, 19, 11);
+            background-color:  #210124;
         }
     .contact{
         margin-bottom: 10px;
@@ -23,7 +23,7 @@ $sql = "SELECT * FROM Users WHERE UserID != $userID";
         border-radius: 10px;
         text-align: center;
         color: white;
-       background-color:  rgb(11, 19, 46);
+       background-color:  #750D37;
        font-size: 26px;
        text-decoration: none;
     }
@@ -33,7 +33,7 @@ $sql = "SELECT * FROM Users WHERE UserID != $userID";
 
     }
     .contact:active{
-      background-color: rgb(11, 19, 20);
+      background-color: #750D37;
     }
     .contact:hover{
       background-color: white;

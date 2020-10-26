@@ -99,7 +99,7 @@ if (isset($_POST["submit"])) {
       height: 100px;
       padding-left: 30px;
       box-sizing: border-box;
-      border: 2px solid rgb(11, 19, 46);
+      border: 2px solid #750D37;
       border-radius: 4px;
       background-color: #f8f8f8;
       resize: none;
@@ -141,15 +141,16 @@ if (isset($_POST["submit"])) {
 
     }
     a:visited{
-      color: rgb(11, 19, 46);
+      color: #750D37;
     }
     .submit{
       width: 100%;
-      background-color: rgb(11, 19, 46);
+      background-color: #750D37;
       color: white;
       padding-top: 20px;
       padding-bottom: 20px;
       font-weight: bold;
+      border-radius: 30px;
     }
   </style>
 </head>
@@ -177,7 +178,7 @@ if (isset($_POST["submit"])) {
       ?>
         <div class="post">
           <?php echo  "<a href='UserProfile.php?UserID=" . $row['UserID'] . "' target='main' >" ?>
-          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label><span> <?php echo "#" . $row1["Username"]; ?></span></a><br>
+          <label><?php echo $row1["Names"] . " " . $row1["Surname"]; ?></label></a>
           <span class="time"> <?php echo $row["DateOfPost"]; ?></span><br>
           
           <?php
@@ -203,6 +204,9 @@ if (isset($_POST["submit"])) {
       ?>
     </div>
   </div>
+  <!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/8713529.js"></script>
+<!-- End of HubSpot Embed Code -->
 </body>
 
 </html>
